@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food at Home CPI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>CPI Data</h1>
+
+     <input
+          type="text"
+          id="series-input"
+          placeholder="Enter series names"
+        />
+    <button id="fetch-data-button">Get Data</button>
+
+    <table id="cpi-table" border="1">
+        <thead>
+            <tr><th>Year</th><th>Period</th><th>Value</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- <h1>Percent change</h1>
+    <table id="percent-change" border="1">
+        <thead>
+            <tr><th>Category</th><th>m/m</th><th>y/y</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table> -->
+
+    <!-- Load external JS -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
