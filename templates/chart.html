@@ -13,6 +13,7 @@
 			<a href="{{ url_for('index') }}">Table</a>
 			<a href="{{ url_for('chart') }}">Chart</a>
 		</nav>
+		<h1>Chart</h1>
 
 		<input
 			type="text"
@@ -22,16 +23,9 @@
 		/>
 		<button id="fetch-data-button">Get Data</button>
 
-		<table id="cpi-table" border="1">
-			<thead>
-				<tr>
-					<th>Year</th>
-					<th>Period</th>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+		<div id="chart-container">
+			<svg id="bar-chart"></svg>
+		</div>
 
 		<!-- Load external JS -->
 		<script src="https://d3js.org/d3.v7.min.js"></script>

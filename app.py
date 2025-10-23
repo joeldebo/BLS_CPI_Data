@@ -32,7 +32,7 @@ def request_data(startyear, endyear, series):
     if response.status_code == 200:
         json_data = response.json()
         makeprettytable(json_data)
-        return json_data
+        return json_data['Results']['series']
     else:
         print(f"Failed to retrieve data: HTTP {response.status_code}")
         return None
@@ -55,8 +55,12 @@ def makeprettytable(json_data):
         print("Request failed:", json_data.get('message', 'No message provided'))
 
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
+
+@app.route('/chart')
+def chart():
+    return render_template('chart.html')
 
 @app.route('/fetch_data', methods = (['POST']))
 def fetch_data():
