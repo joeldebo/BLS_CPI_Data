@@ -23,12 +23,23 @@
 		/>
 		<button id="fetch-data-button">Get Data</button>
 
+		<div class="chart-controls">
+			<label class="switch">
+				<input type="checkbox" id="percent-toggle" />
+				<span class="slider"></span>
+			</label>
+			<span id="metric-label">Percent Change</span>
+		</div>
+
 		<div id="chart-container">
 			<svg id="bar-chart"></svg>
 		</div>
 
+		<button id="download-chart">Download Chart</button>
+
 		<!-- Load external JS -->
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		<script src="{{ url_for('static', filename='main.js') }}"></script>
+		<script src="{{ url_for('static', filename='bar_chart.js') }}"></script>
 	</body>
 </html>
