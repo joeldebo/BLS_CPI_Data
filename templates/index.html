@@ -7,6 +7,10 @@
 			rel="stylesheet"
 			href="{{ url_for('static', filename='style.css') }}"
 		/>
+		<link
+			href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
 		<nav class="navbar">
@@ -18,7 +22,7 @@
 			type="text"
 			id="series-input"
 			placeholder="Enter series names"
-			value="Food at home, Beef and veal, Uncooked ground beef, Uncooked beef roasts"
+			value="Food; Food at home; Cereals and bakery products; Meats, poultry, fish, and eggs; Meats, poultry, and fish; Meats; Fruits and vegetables; Nonalcoholic beverages and beverage materials; Other food at home; Alcoholic beverages; Frozen vegetables"
 		/>
 
 		<div class="seasonal-adjustment">
@@ -26,24 +30,16 @@
 				<input type="checkbox" id="seasonal-toggle" />
 				<span class="slider"></span>
 			</label>
-			<span>Seasonal Adjustment</span>
+			<span>Seasonally Adjusted</span>
 		</div>
 
 		<button id="fetch-data-button">Get Data</button>
 
-		<table id="cpi-table" border="1">
-			<thead>
-				<tr>
-					<th>Year</th>
-					<th>Period</th>
-					<th>Value</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-		</table>
+		<div id="cpi-table"></div>
 
-		<!-- Load external JS -->
 		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<script src="https://unpkg.com/tabulator-tables@6.3.1/dist/js/tabulator.min.js"></script>
 		<script src="{{ url_for('static', filename='main.js') }}"></script>
+		<script src="{{ url_for('static', filename='table.js') }}"></script>
 	</body>
 </html>

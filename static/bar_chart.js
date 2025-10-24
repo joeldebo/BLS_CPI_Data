@@ -1,4 +1,8 @@
-document.getElementById('percent-toggle').addEventListener('change', (e) => {
+document.getElementById('percent-toggle').addEventListener('change', () => {
+	drawChart();
+});
+
+document.getElementById('seasonal-toggle').addEventListener('change', () => {
 	drawChart();
 });
 
@@ -28,15 +32,15 @@ async function drawChart(metric = 'absolute') {
 		last_year: d.data[12].value,
 	}));
 
-	const data = d3
-		.sort(formatted_data, (d) => d['last_year'] - d['latest_month'])
+	const data = formatted_data
 		.map((d) => ({
 			...d,
 			value:
 				metric === 'absolute'
-					? d['latest_month'] - d['last_year']
-					: (d['latest_month'] - d['last_year']) / d['last_year'],
-		}));
+					? d.latest_month - d.last_year
+					: (d.latest_month - d.last_year) / d.last_year,
+		}))
+		.sort((a, b) => b.value - a.value);
 
 	// Specify the chart’s dimensions.
 	const barHeight = 25;
