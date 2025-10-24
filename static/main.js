@@ -1,11 +1,16 @@
 async function fetchData() {
 	const series = await getSeriesNames();
+	let seasonallyAdjusted = document.getElementById('seasonal-toggle');
+	seasonallyAdjusted = seasonallyAdjusted ? seasonallyAdjusted.checked : false;
 
 	try {
 		const response = await fetch('/fetch_data', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ series: series }),
+			body: JSON.stringify({
+				series: series,
+				seasonallyAdjusted: seasonallyAdjusted,
+			}),
 		});
 
 		const data = await response.json();
@@ -21,7 +26,6 @@ async function fetchData() {
 
 document.getElementById('fetch-data-button').addEventListener('click', () => {
 	generateTable();
-	drawChart();
 });
 
 async function getSeriesNames() {

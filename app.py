@@ -7,20 +7,21 @@ import pandas as pd
 app = Flask(__name__)
 API_KEY = '07a02014ee324d28806596c2487ce37f'
 
-def get_series_ids(series):
+def get_series_ids(series, seasonallyAdjusted):
+    prefix = "CUSR0000" if seasonallyAdjusted else "CUUR0000"
     ids = []
     df = pd.read_csv("cu.tsv", sep='\t')
     lookup = dict(zip(df["item_name"], df["item_code"]))
     for i in series:
-        ids.append("CUUR0000" + lookup[i])
+        ids.append(prefix + lookup[i])
     return ids
 
-def request_data(startyear, endyear, series):
+def request_data(startyear, endyear, series, seasonallyAdjusted):
     # Define headers and data payload
     headers = {'Content-type': 'application/json'}
     data = json.dumps({
 
-        "seriesid": get_series_ids(series),  # Full series ID
+        "seriesid": get_series_ids(series, seasonallyAdjusted),  # Full series ID
         "startyear": str(startyear),
         "endyear": str(endyear),
         "registrationkey": API_KEY
@@ -66,10 +67,13 @@ def chart():
 def fetch_data():
     payload = request.get_json()
     series = payload.get("series", [])
+    seasonallyAdjusted = payload.get("seasonallyAdjusted")
+    print('-------------------------------------')
+    print("Seasonal Adjusted?:", seasonallyAdjusted)
     if not series:
         return jsonify({"error": "no series IDs provided"}), 400
     print(series)
-    data = request_data(2024, 2025, series)
+    data = request_data(2024, 2025, series, seasonallyAdjusted)
     return data
 
 if __name__ == "__main__":

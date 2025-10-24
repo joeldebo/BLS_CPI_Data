@@ -11,7 +11,7 @@
 	<body>
 		<nav class="navbar">
 			<a href="{{ url_for('index') }}">Table</a>
-			<a href="{{ url_for('chart') }}">Chart</a>
+			<a href="{{ url_for('chart') }}">Bar Chart</a>
 		</nav>
 		<h1>Chart</h1>
 
@@ -21,7 +21,15 @@
 			placeholder="Enter series names"
 			value="Food at home, Beef and veal, Uncooked ground beef, Uncooked beef roasts"
 		/>
-		<button id="fetch-data-button">Get Data</button>
+		<div class="seasonal-adjustment">
+			<label class="switch">
+				<input type="checkbox" id="seasonal-toggle" />
+				<span class="slider"></span>
+			</label>
+			<span>Seasonal Adjustment</span>
+		</div>
+
+		<button id="fetch-data-button-chart">Get Data</button>
 
 		<div class="chart-controls">
 			<label class="switch">

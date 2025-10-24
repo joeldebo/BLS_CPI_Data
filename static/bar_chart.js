@@ -2,6 +2,12 @@ document.getElementById('percent-toggle').addEventListener('change', (e) => {
 	drawChart();
 });
 
+document
+	.getElementById('fetch-data-button-chart')
+	.addEventListener('click', () => {
+		drawChart();
+	});
+
 async function drawChart(metric = 'absolute') {
 	metric = document.getElementById('percent-toggle').checked
 		? 'relative'
